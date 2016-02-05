@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        standardselfsigned {
+            keyAlias 'TheinerKey'
+            keyPassword 'ngc64738'
+            storeFile file('C:/Users/Thomas/Keystore/android.jks')
+            storePassword 'ngc64738'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.standardselfsigned
         }
     }
 }
