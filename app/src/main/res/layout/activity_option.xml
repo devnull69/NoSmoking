@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="org.theiner.nosmoking.OptionActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ich bin Nichtraucher seit:"
+        android:textSize="16dp"
+        android:id="@+id/lblStartDatum"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editStartDatum"
+        android:textSize="16dp"
+        android:layout_below="@+id/lblStartDatum"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ich habe soviele Zigaretten pro Tag geraucht:"
+        android:textSize="16dp"
+        android:id="@+id/lblAnzahlZiggis"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/editStartDatum"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editAnzahlZiggis"
+        android:textSize="16dp"
+        android:layout_below="@+id/lblAnzahlZiggis"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soviele Zigaretten sind in einer Packung:"
+        android:textSize="16dp"
+        android:id="@+id/lblAnzahlInPackung"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/editAnzahlZiggis"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editAnzahlInPackung"
+        android:textSize="16dp"
+        android:layout_below="@+id/lblAnzahlInPackung"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Soviel kostet eine Packung:"
+        android:textSize="16dp"
+        android:id="@+id/lblKostenProPackung"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/editAnzahlInPackung"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editKostenProPackung"
+        android:textSize="16dp"
+        android:layout_below="@+id/lblKostenProPackung"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/btnOk"
+        android:onClick="btnOk_Click"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="110dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abbrechen"
+        android:id="@+id/btnCancel"
+        android:onClick="btnCancel_Click"
+        android:layout_alignTop="@+id/btnOk"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

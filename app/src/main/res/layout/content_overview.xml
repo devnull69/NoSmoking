@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="org.theiner.nosmoking.OverviewActivity"
+    tools:showIn="@layout/activity_overview">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Du bist Nichtraucher seit"
+        android:id="@+id/lblNichtraucher"
+        android:textSize="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="396 Tagen"
+        android:id="@+id/txtNichtraucher"
+        android:layout_marginTop="20dp"
+        android:textSize="70dp"
+        android:textIsSelectable="true"
+        android:textColor="#00bb00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 Monate, 0 Tage"
+        android:layout_marginTop="100dp"
+        android:id="@+id/txtMonateTage"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dabei hast Du"
+        android:layout_marginTop="220dp"
+        android:id="@+id/lblGeld"
+        android:textSize="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="€ 9999.00"
+        android:id="@+id/txtGeld"
+        android:layout_marginTop="240dp"
+        android:textSize="70dp"
+        android:textIsSelectable="true"
+        android:textColor="#00bb00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gespart"
+        android:layout_marginTop="310dp"
+        android:id="@+id/lblGespart"
+        android:textSize="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zuletzt aktualisiert:"
+        android:layout_marginTop="430dp"
+        android:id="@+id/txtAktualisiert"
+        android:textSize="15dp" />
+</RelativeLayout>
