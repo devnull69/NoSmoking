@@ -1,4 +1,4 @@
-package org.theiner.nosmoking;
+package org.theiner.nosmoking.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.theiner.nosmoking.R;
+import org.theiner.nosmoking.services.CheckDaysMonths;
 import org.theiner.nosmoking.util.DateHelper;
 import org.theiner.nosmoking.util.Tempus;
 

@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import org.joda.time.DateTime;
-import org.theiner.nosmoking.CheckDaysMonths;
+import org.theiner.nosmoking.services.CheckDaysMonths;
 
 /**
  * Created by Thomas on 04.02.2016.

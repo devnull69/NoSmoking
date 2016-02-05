@@ -1,6 +1,5 @@
-package org.theiner.nosmoking;
+package org.theiner.nosmoking.services;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,6 +10,8 @@ import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import org.theiner.nosmoking.activities.OverviewActivity;
+import org.theiner.nosmoking.R;
 import org.theiner.nosmoking.util.AlarmHelper;
 import org.theiner.nosmoking.util.DateHelper;
 import org.theiner.nosmoking.util.Tempus;
