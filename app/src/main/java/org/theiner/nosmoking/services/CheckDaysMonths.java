@@ -96,10 +96,12 @@ public class CheckDaysMonths extends Service {
                     .setContentTitle("Gratuliere!")
                     .setContentText("Du bist seit " + notifyText + " rauchfrei!")
                     .setDefaults(Notification.DEFAULT_ALL)
-                    .setSmallIcon(R.mipmap.icon_white)
                     .setTicker("Du bist seit " + notifyText + " rauchfrei!")
                     .setWhen(System.currentTimeMillis())
                     .getNotification();
+
+            // set icons
+            noti.contentView.setImageViewResource(R.drawable.small_icon, R.drawable.large_icon);
 
             NotificationManager notificationManager
                     = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
