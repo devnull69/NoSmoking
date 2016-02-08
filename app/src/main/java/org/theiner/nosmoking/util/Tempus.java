@@ -55,9 +55,9 @@ public class Tempus {
     public String toStringWithoutDays() {
         String returnValue = "";
         if(jahre>0)
-            returnValue += jahre + (jahre==1 ? " Jahr" : " Jahre");
+            returnValue += jahre + (jahre==1 ? " Jahr" : " Jahren");
         if(monate>0)
-            returnValue += monate + (returnValue.isEmpty()?"":", ") + (monate==1 ? " Monat" : " Monate");
+            returnValue += monate + (returnValue.isEmpty()?"":"und ") + (monate==1 ? " Monat" : " Monaten");
 
         return returnValue;
     }
