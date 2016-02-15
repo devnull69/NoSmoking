@@ -9,11 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import org.theiner.nosmoking.activities.OverviewActivity;
 import org.theiner.nosmoking.R;
+import org.theiner.nosmoking.context.NoSmokingApplication;
 import org.theiner.nosmoking.util.AlarmHelper;
 import org.theiner.nosmoking.util.DateHelper;
 import org.theiner.nosmoking.util.Tempus;
@@ -28,12 +31,14 @@ import java.util.Calendar;
 /**
  * Created by Thomas on 01.02.2016.
  */
-public class CheckDaysMonths extends Service {
+public class CheckDaysMonthsService extends Service {
 
     private static int ALARM_ID = 131313;
 
     private final String CHECK_OP_NO_THROW = "checkOpNoThrow";
     private final String OP_POST_NOTIFICATION = "OP_POST_NOTIFICATION";
+
+    private NoSmokingApplication myApp;
 
     @Override
     public void onCreate() {
@@ -43,6 +48,8 @@ public class CheckDaysMonths extends Service {
         int prevJahre = settings.getInt("jahre", 0);
         int prevMonate = settings.getInt("monate", 0);
         long prevGesamtTage = settings.getLong("gesamtTage", -1);
+
+        float multiplier = settings.getFloat("multiplier", -1);
 
         Calendar heute = Calendar.getInstance();
 
@@ -63,9 +70,10 @@ public class CheckDaysMonths extends Service {
             // Ist ein Jahr oder ein weiterer Monat vergangen?
             long gesamtTage = tempus.getGesamtTage();
             if (tempus.getJahre() > prevJahre || tempus.getMonate() > prevMonate) {
-                sendNotification(tempus.toStringWithoutDays());
+                sendNotification(tempus.toStringWithoutDays(), multiplier);
             } else if (Math.floor(gesamtTage / 100) > Math.floor(prevGesamtTage / 100)) {
-                sendNotification(gesamtTage + (gesamtTage == 1 ? " Tag" : " Tagen"));
+//            } else if ((gesamtTage+1) > prevGesamtTage) {
+                sendNotification(gesamtTage + (gesamtTage == 1 ? " Tag" : " Tagen"), multiplier);
             }
         }
 
@@ -84,9 +92,13 @@ public class CheckDaysMonths extends Service {
         AlarmHelper.setAlarm(this, ALARM_ID, 2);
     }
 
-    public void sendNotification(String notifyText) {
+    public void sendNotification(String notifyText, float multiplier) {
 
         if(isNotificationEnabled(this)) {
+            Bitmap myLargeIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.large_icon);
+
+            myLargeIcon = Bitmap.createScaledBitmap(myLargeIcon, (int)(myLargeIcon.getWidth()*multiplier), (int)(myLargeIcon.getHeight()*multiplier), false);
+
             Intent mainIntent = new Intent(this, OverviewActivity.class);
             @SuppressWarnings("deprecation")
             Notification noti = new Notification.Builder(this)
@@ -94,14 +106,13 @@ public class CheckDaysMonths extends Service {
                     .setContentIntent(PendingIntent.getActivity(this, 131314, mainIntent,
                             PendingIntent.FLAG_UPDATE_CURRENT))
                     .setContentTitle("Gratuliere!")
+                    .setSmallIcon(R.mipmap.small_icon)
+                    .setLargeIcon(myLargeIcon)
                     .setContentText("Du bist seit " + notifyText + " rauchfrei!")
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setTicker("Du bist seit " + notifyText + " rauchfrei!")
                     .setWhen(System.currentTimeMillis())
                     .getNotification();
-
-            // set icons
-            noti.contentView.setImageViewResource(R.drawable.small_icon, R.drawable.large_icon);
 
             NotificationManager notificationManager
                     = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);

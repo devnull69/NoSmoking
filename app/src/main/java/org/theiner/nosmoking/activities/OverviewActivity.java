@@ -1,18 +1,25 @@
 package org.theiner.nosmoking.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.theiner.nosmoking.R;
-import org.theiner.nosmoking.services.CheckDaysMonths;
+import org.theiner.nosmoking.context.NoSmokingApplication;
+import org.theiner.nosmoking.services.AlarmStarterService;
+import org.theiner.nosmoking.services.CheckDaysMonthsService;
 import org.theiner.nosmoking.util.DateHelper;
 import org.theiner.nosmoking.util.Tempus;
 
@@ -23,6 +30,11 @@ import java.util.Calendar;
 
 public class OverviewActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "NoSmokingFile";
+
+    private static int clickCount = 0;
+    private static boolean isAdmin = false;
+
+    private NoSmokingApplication myApp;
 
     private void zeigeWerte() throws ParseException {
         TextView txtNichtraucher = (TextView) findViewById(R.id.txtNichtraucher);
@@ -72,13 +84,23 @@ public class OverviewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void zeigeAdmin() {
+        Intent intent = new Intent(this, AdminActivity.class);
+        startActivity(intent);
+    }
+
     public static void updatePrefs(Context context, Tempus tempus) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("jahre", tempus.getJahre());
         editor.putInt("monate", tempus.getMonate());
         editor.putLong("gesamtTage", tempus.getGesamtTage());
+        editor.putLong("lastChecked", System.currentTimeMillis());
         editor.commit();
+    }
+
+    public void setAdminMode() {
+        isAdmin = true;
     }
 
     @Override
@@ -88,13 +110,42 @@ public class OverviewActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        myApp = (NoSmokingApplication) getApplicationContext();
+
+        final Activity that = this;
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            private int clickCount = 0;
+
+            @Override
+            public void onClick(View v) {
+                clickCount++;
+                if (clickCount >= 7) {
+                    clickCount = 0;
+                    setAdminMode();
+                    invalidateOptionsMenu();
+                    Toast.makeText(that, "Admin mode enabled", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         Log.d("NoSmoking", "Service wird gestartet.");
 
-        startService(new Intent(this, CheckDaysMonths.class));
+        startService(new Intent(this, AlarmStarterService.class));
 
         try {
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             String strStartDatum = settings.getString("startDatum", null);
+
+            // Density metrics merken für Large Icon der Notification
+            DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+            float multiplier = metrics.density/3f;   // Bitmap liegt mit 480dpi vor (density Faktor 3), die Bildschirmauflösung kann aber geringer sein
+
+            SharedPreferences.Editor myEditor = settings.edit();
+            myEditor.putFloat("multiplier", multiplier);
+            myEditor.commit();
 
             if(strStartDatum != null) {
                 zeigeWerte();
@@ -124,6 +175,14 @@ public class OverviewActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if(isAdmin)
+            menu.getItem(1).setVisible(true);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -140,6 +199,11 @@ public class OverviewActivity extends AppCompatActivity {
             System.exit(0);
         }
 
+        if(id == R.id.action_admin) {
+            zeigeAdmin();
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
 }

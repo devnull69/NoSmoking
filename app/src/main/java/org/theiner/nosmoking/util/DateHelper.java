@@ -1,5 +1,6 @@
 package org.theiner.nosmoking.util;
 
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.Months;
 
@@ -29,11 +30,12 @@ public class DateHelper {
 
         LocalDate referenzDate = LocalDate.fromCalendarFields(referenzTag);
         LocalDate nichtrauchenAnfangDate = LocalDate.fromCalendarFields(nichtrauchenAnfang);
+        LocalDate heuteDate = LocalDate.fromCalendarFields(heute);
 
         int monatDiff = Months.monthsBetween(nichtrauchenAnfangDate.withDayOfMonth(1), referenzDate.withDayOfMonth(1)).getMonths();
 
-        long diffDays = heute.getTimeInMillis() - referenzTag.getTimeInMillis();
-        float days = ((float) diffDays) / (24 * 60 * 60 * 1000);
+        //long diffDays = heute.getTimeInMillis() - referenzTag.getTimeInMillis();
+        long days = Days.daysBetween(referenzDate, heuteDate).getDays();
         int jahrDiff = 0;
 
         if(monatDiff > 11) {
@@ -41,13 +43,13 @@ public class DateHelper {
             monatDiff = monatDiff - jahrDiff * 12;
         }
 
-        long diff = heute.getTimeInMillis() - nichtrauchenAnfang.getTimeInMillis();
-        long tage = (long) (diff / (24 * 60 * 60 * 1000));
+        //long diff = heute.getTimeInMillis() - nichtrauchenAnfang.getTimeInMillis();
+        long tage = Days.daysBetween(nichtrauchenAnfangDate, heuteDate).getDays();
 
         Tempus returnValue = new Tempus();
         returnValue.setJahre(jahrDiff);
         returnValue.setMonate(monatDiff);
-        returnValue.setTage((int) (days + 0.5));
+        returnValue.setTage((int)days);
         returnValue.setGesamtTage(tage);
 
         return returnValue;

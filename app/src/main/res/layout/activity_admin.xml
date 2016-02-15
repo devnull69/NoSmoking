@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.AdminActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jahre"
+        android:textSize="16dp"
+        android:id="@+id/lblJahre"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxx"
+        android:textSize="16dp"
+        android:id="@+id/txtJahre"
+        android:layout_below="@id/lblJahre"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="monate"
+        android:textSize="16dp"
+        android:layout_below="@id/txtJahre"
+        android:layout_marginTop="60dp"
+        android:id="@+id/lblMonate"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxx"
+        android:textSize="16dp"
+        android:layout_below="@id/lblMonate"
+        android:layout_marginTop="80dp"
+        android:id="@+id/txtMonate"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gesamtTage"
+        android:textSize="16dp"
+        android:layout_below="@id/txtMonate"
+        android:layout_marginTop="120dp"
+        android:id="@+id/lblGesamtTage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxx"
+        android:textSize="16dp"
+        android:layout_below="@id/lblGesamtTage"
+        android:layout_marginTop="140dp"
+        android:id="@+id/txtGesamtTage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lastChecked"
+        android:textSize="16dp"
+        android:layout_below="@id/txtGesamtTage"
+        android:layout_marginTop="180dp"
+        android:id="@+id/lblLastChecked"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxx"
+        android:textSize="16dp"
+        android:layout_below="@id/lblLastChecked"
+        android:layout_marginTop="200dp"
+        android:id="@+id/txtLastChecked"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alarm gesetzt?"
+        android:textSize="16dp"
+        android:layout_below="@id/txtLastChecked"
+        android:layout_marginTop="240dp"
+        android:id="@+id/txtAlarmGesetzt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:id="@+id/btnOk"
+        android:onClick="btnOk_Click"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="110dp" />
+
+
+</RelativeLayout>
