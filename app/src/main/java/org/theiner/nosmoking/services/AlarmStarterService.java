@@ -46,9 +46,9 @@ public class AlarmStarterService extends Service {
     public void setAlarm() {
 
         // Falls er nicht schon läuft
-        // Morgens um 2 Uhr
+        // Morgens um 1 Uhr
         if(AlarmHelper.getPendingIntentFromAlarm(this, ALARM_ID) == null)
-            AlarmHelper.setAlarm(this, ALARM_ID, 2);
+            AlarmHelper.setAlarm(this, ALARM_ID, 1);
     }
 
     @Nullable

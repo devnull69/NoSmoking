@@ -88,8 +88,8 @@ public class CheckDaysMonthsService extends Service {
 
     public void setAlarm() {
 
-        // Morgens um 2 Uhr
-        AlarmHelper.setAlarm(this, ALARM_ID, 2);
+        // Morgens um 1 Uhr
+        AlarmHelper.setAlarm(this, ALARM_ID, 1);
     }
 
     public void sendNotification(String notifyText, float multiplier) {

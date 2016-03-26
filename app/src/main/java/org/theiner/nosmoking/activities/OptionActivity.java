@@ -1,5 +1,6 @@
 package org.theiner.nosmoking.activities;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class OptionActivity extends AppCompatActivity {
+public class OptionActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
