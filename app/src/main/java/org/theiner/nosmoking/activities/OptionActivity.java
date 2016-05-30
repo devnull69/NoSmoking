@@ -59,8 +59,20 @@ public class OptionActivity extends Activity {
 
         SharedPreferences settings = getSharedPreferences(OverviewActivity.PREFS_NAME, 0);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        Date startDatum = new Date();
         try {
-            Date startDatum = sdf.parse(strStartDatum);
+            startDatum = sdf.parse(strStartDatum);
+        } catch (ParseException e) {
+            try {
+                SimpleDateFormat sdf2 = new SimpleDateFormat("ddMMyyyy");
+                startDatum = sdf2.parse(strStartDatum);
+            } catch (ParseException e1) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Ungültiges Datum!", Toast.LENGTH_SHORT);
+                toast.show();
+                e1.printStackTrace();
+            }
+        }
+        try {
             Date heute = new Date();
             if(heute.getTime() - startDatum.getTime() < 0)
                 throw new ParseException("Date must be in the past", 0);
@@ -70,7 +82,7 @@ public class OptionActivity extends Activity {
             float kostenProPackung = Float.parseFloat(editKostenProPackung.getText().toString());
 
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString("startDatum", strStartDatum);
+            editor.putString("startDatum", sdf.format(startDatum));
             editor.putInt("anzahlZiggis", anzahlZiggis);
             editor.putInt("anzahlInPackung", anzahlInPackung);
             editor.putFloat("kostenProPackung", kostenProPackung);
