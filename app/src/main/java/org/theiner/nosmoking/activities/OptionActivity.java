@@ -3,6 +3,9 @@ package org.theiner.nosmoking.activities;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,15 +25,11 @@ import java.util.Date;
 
 public class OptionActivity extends Activity {
 
-    private final int DATEPICKER_ID = 4711;
-
     private int year;
     private int month;
     private int day;
 
     private TextView editStartDatum;
-
-    private DatePickerDialog dpd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,7 @@ public class OptionActivity extends Activity {
             month = Integer.parseInt(strStartDatum.substring(3,5)) - 1;
             year = Integer.parseInt(strStartDatum.substring(6,10));
         } else {
-            showDialog(DATEPICKER_ID);
+            setDate(editStartDatum);
         }
 
     }
@@ -131,17 +130,16 @@ public class OptionActivity extends Activity {
     }
 
     public void setDate(View view) {
-        showDialog(DATEPICKER_ID);
-    }
+        DialogFragment dFragment = new DatePickerFragment();
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        if (id == DATEPICKER_ID) {
-            dpd = new DatePickerDialog(this, myDateListener, year, month, day);
-            dpd.setTitle("Ich bin Nichtraucher seit");
-            return dpd;
-        }
-        return null;
+        Bundle args = new Bundle();
+        args.putInt("year", year);
+        args.putInt("month", month);
+        args.putInt("day", day);
+
+        dFragment.setArguments(args);
+
+        dFragment.show(getFragmentManager(), "Date Picker");
     }
 
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -156,4 +154,29 @@ public class OptionActivity extends Activity {
                 .append(month<10?"0"+month:month).append(".").append(year));
     }
 
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener{
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState){
+
+            Bundle args = getArguments();
+
+            int year = args.getInt("year");
+            int month = args.getInt("month");
+            int day = args.getInt("day");
+
+            DatePickerDialog dpd = new DatePickerDialog(getActivity(),this,year,month,day);
+
+            dpd.setTitle("Ich bin Nichtraucher seit");
+
+            return dpd;
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day){
+            OptionActivity act = (OptionActivity) getActivity();
+            act.showDate(year, month+1, day);
+        }
+
+    }
 }
