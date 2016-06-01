@@ -30,6 +30,8 @@ public class OptionActivity extends Activity {
 
     private TextView editStartDatum;
 
+    private DatePickerDialog dpd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -135,7 +137,9 @@ public class OptionActivity extends Activity {
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DATEPICKER_ID) {
-            return new DatePickerDialog(this, myDateListener, year, month, day);
+            dpd = new DatePickerDialog(this, myDateListener, year, month, day);
+            dpd.setTitle("Ich bin Nichtraucher seit");
+            return dpd;
         }
         return null;
     }
