@@ -54,6 +54,11 @@ public class OptionActivity extends Activity {
         int anzahlInPackung = settings.getInt("anzahlInPackung", 22);
         float kostenProPackung = settings.getFloat("kostenProPackung", 6.0f);
 
+        editStartDatum.setText(strStartDatum);
+        editAnzahlZiggis.setText(String.valueOf(anzahlZiggis));
+        editAnzahlInPackung.setText(String.valueOf(anzahlInPackung));
+        editKostenProPackung.setText(String.valueOf(kostenProPackung));
+
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
@@ -62,12 +67,10 @@ public class OptionActivity extends Activity {
             day = Integer.parseInt(strStartDatum.substring(0,2));
             month = Integer.parseInt(strStartDatum.substring(3,5)) - 1;
             year = Integer.parseInt(strStartDatum.substring(6,10));
+        } else {
+            showDialog(DATEPICKER_ID);
         }
 
-        editStartDatum.setText(strStartDatum);
-        editAnzahlZiggis.setText(String.valueOf(anzahlZiggis));
-        editAnzahlInPackung.setText(String.valueOf(anzahlInPackung));
-        editKostenProPackung.setText(String.valueOf(kostenProPackung));
     }
 
     public void btnOk_Click(View view) {
