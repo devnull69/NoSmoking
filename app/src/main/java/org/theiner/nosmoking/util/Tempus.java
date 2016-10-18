@@ -57,7 +57,7 @@ public class Tempus {
         if(jahre>0)
             returnValue += jahre + (jahre==1 ? " Jahr" : " Jahren");
         if(monate>0)
-            returnValue += monate + (returnValue.isEmpty()?"":"und ") + (monate==1 ? " Monat" : " Monaten");
+            returnValue += (returnValue.isEmpty()?"":" und ") + monate + (monate==1 ? " Monat" : " Monaten");
 
         return returnValue;
     }
