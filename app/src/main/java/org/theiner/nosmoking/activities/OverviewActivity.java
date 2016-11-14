@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,9 +60,9 @@ public class OverviewActivity extends AppCompatActivity {
         Tempus tempus = DateHelper.getTempus(heute, nichtrauchenAnfang);
         long tage = tempus.getGesamtTage();
         if(tage>999)
-            txtNichtraucher.setTextSize(61.0f);
+            txtNichtraucher.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 61.0f);
         else
-            txtNichtraucher.setTextSize(70.0f);
+            txtNichtraucher.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70.0f);
 
         txtNichtraucher.setText(tage + (tage == 1 ? " Tag" : " Tagen"));
 
@@ -69,9 +70,9 @@ public class OverviewActivity extends AppCompatActivity {
 
         float euro = tage * kostenProPackung * anzahlZiggis / anzahlInPackung;
         if(euro>9999.99f)
-            txtGeld.setTextSize(63.0f);
+            txtGeld.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 63.0f);
         else
-            txtGeld.setTextSize(70.0f);
+            txtGeld.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70.0f);
         txtGeld.setText("€ " + new DecimalFormat("#.00").format(euro));
 
         sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
